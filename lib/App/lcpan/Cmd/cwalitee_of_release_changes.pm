@@ -8,11 +8,13 @@ use strict;
 use warnings;
 use Log::ger;
 
-use Perinci::Object;
-
 require App::lcpan;
+use Cwalitee::Common;
+use Hash::Subset qw(hash_subset);
 
 our %SPEC;
+
+my %calc_args = Cwalitee::Common::args_calc('CPAN::Changes::');
 
 $SPEC{handle_cmd} = {
     v => 1.1,
@@ -24,7 +26,8 @@ _
         %App::lcpan::common_args,
         #%App::lcpan::dist_or_release_args,
         %App::lcpan::mod_or_dist_or_script_args,
-    },
+        %calc_args,
+   },
 };
 sub handle_cmd {
     require App::lcpan::Cmd::changes;
@@ -49,6 +52,7 @@ sub handle_cmd {
 
     CPAN::Changes::Cwalitee::calc_cpan_changes_cwalitee(
         path => $filename,
+        hash_subset(\%args, \%calc_args),
     );
 }
 
