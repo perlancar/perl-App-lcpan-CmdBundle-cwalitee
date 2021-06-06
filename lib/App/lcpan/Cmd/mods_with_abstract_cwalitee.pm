@@ -21,7 +21,7 @@ my %calc_args = Cwalitee::Common::args_calc('Module::Abstract::');
 
 $SPEC{handle_cmd} = {
     v => 1.1,
-    summary => "Like mods subcommand, but also return module abstract cwalitees in detail (-l) mode",
+    summary => "Like 'mods' subcommand, but also return module abstract cwalitees in detail (-l) mode",
     args => {
         %mods_args,
         %calc_args,
@@ -46,7 +46,7 @@ sub handle_cmd {
             hash_subset(\%args, \%calc_args),
         );
         unless ($cres->[0] == 200) {
-            log_warn "Can't calc cwalitee for module '$row->{module}: $cres->[0] - $cres->[1]";
+            log_warn "Can't calc cwalitee for module '$row->{module}': $cres->[0] - $cres->[1]";
             next;
         }
         $row->{cwalitee} = $cres->[3]{'func.score'};
