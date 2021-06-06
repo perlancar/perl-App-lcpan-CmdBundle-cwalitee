@@ -44,6 +44,7 @@ sub handle_cmd {
     log_info "Abstract is: %s", $abstract;
     Module::Abstract::Cwalitee::calc_module_abstract_cwalitee(
         abstract => $abstract,
+        module => $args{module},
         hash_subset(\%args, \%calc_args),
     );
 }

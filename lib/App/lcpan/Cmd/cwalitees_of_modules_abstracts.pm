@@ -29,7 +29,6 @@ _
     },
 };
 sub handle_cmd {
-    require App::lcpan::Cmd::changes;
     require Module::Abstract::Cwalitee;
 
     my %args = @_;
@@ -47,6 +46,7 @@ sub handle_cmd {
 
         my $cres = Module::Abstract::Cwalitee::calc_module_abstract_cwalitee(
             abstract => $abstract,
+            module => $mod,
             hash_subset(\%args, \%calc_args),
         );
         unless ($cres->[0] == 200) {
